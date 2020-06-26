@@ -17,6 +17,7 @@ import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,15 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
 
    
   ],
-  providers: [EmployeeService],
+  providers: [
+    {provide:
+    
+      LocationStrategy 
+    , useClass :HashLocationStrategy
+
+    },
+    EmployeeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
