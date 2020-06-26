@@ -1,0 +1,99 @@
+<div class="container d-flex justify-content-center mt-5  rtl   ">
+  <div class="card w-100 ">
+    <h5 class="card-header">الموظفين</h5>
+    <div class="card-body">
+      <table class="table table-hover table-sm ">
+        <thead>
+          <tr>
+            <th><input type="checkbox" [checked]="CheckAll" (change)="CheckAll = !CheckAll"></th>
+            <th scope="col">#</th>
+            <th scope="col">الكود
+              <a (click)="IdAsc()"> <i id="IdAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="IdDesc()"><i id="IdDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col">الاسم
+              <a (click)="NameAsc()"> <i id="NameAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="NameDesc()"><i id="NameDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col">الوظيفة
+              <a (click)="JobAsc()"> <i id="JobAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="JobDesc()"><i id="JobDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col">موبايل
+              <a (click)="PhoneAsc()"> <i id="PhoneAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="PhoneDesc()"><i id="PhoneDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col">البريد الالكتروني
+              <a (click)="EmailAsc()"> <i id="EmailAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="EmailDesc()"><i id="EmailDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col"> التاريخ
+              <a (click)="DateAsc()"> <i id="DateAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="DateDesc()"><i id="DateDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th scope="col"> الحالة
+              <a (click)="StatusAsc()"> <i id="StatusAsc" style="font-size: 16;" class="fa fa-caret-up mr-1"></i></a>
+              <a (click)="StatusDesc()"><i id="StatusDesc" style="font-size: 16; " class="fa fa-caret-down mr-1"></i></a>
+            </th>
+            <th><i class="fa fa-cog"></i></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of Employees | paginate : options;let i=index">
+            <th><input type="checkbox" class="form-control checkdel" [checked]="CheckAll" [id]="emp.ID"></th>
+            <td scope="row">{{i+1}}</td>
+            <td scope="col">{{emp.ID}}</td>
+            <td scope="col">{{emp.Name}}</td>
+            <td scope="col">{{emp.Job}}</td>
+            <td scope="col">{{emp.Phone}}</td>
+            <td scope="col">{{emp.Email}}</td>
+            <td scope="col"> {{emp.Date | date: 'dd/MM/yyyy'}}</td>
+            <td scope="col">
+              <label class="switch">
+                <input type="checkbox" [checked]="emp.IsActive" (change)="change(emp.ID)">
+                <span class="slider round"></span>
+              </label>
+            </td>
+            <td>
+              <a (click)="Edit(emp.ID)">
+                <i class="fa fa-edit list-group-item p-1"></i>
+              </a>
+              <a>
+                <i data-toggle="modal" data-target="#exampleModal" class="fa fa-trash list-group-item p-1" style="font-size: 19px;"></i>
+                <!-- Modal -->
+                <div class="modal fade rtl" id="exampleModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">تأكيد الحذف </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        هل أنت متأكد من رغبتك في حذف الموظف؟
+                      </div>
+                      <div class="modal-footer rtl">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">لأ</button>
+                        <button (click)="Delete(emp.ID)" type="button" class="btn btn-primary"
+                          data-dismiss="modal">نعم</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-xs-12 text-center margin-top-15 d-flex justify-content-start"
+        *ngIf="options.totalItems>=options.itemsPerPage">
+        <pagination-controls class="my-pagination" (pageChange)="getNextPrevData($event)" id='pagination' maxSize="5"
+          directionLinks="true" autohide="true" previousLabel="" nextLabel="">
+        </pagination-controls>
+
+      </div>
+    </div>
+  </div>
+</div>
