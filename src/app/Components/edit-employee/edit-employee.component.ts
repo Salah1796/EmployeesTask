@@ -1,3 +1,4 @@
+import { EmailValidators } from 'src/app/shared/Email.vaildators';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { EmployeeService } from 'src/app/Services/employee.service';
@@ -25,7 +26,7 @@ export class EditEmployeeComponent implements OnInit {
 
     this.AddEmployeeFrom = new FormGroup({
       Name: new FormControl("", [Validators.required, Validators.maxLength(200)]),
-      Email: new FormControl("", [Validators.required, Validators.email]),
+      Email: new FormControl("", [Validators.required, EmailValidators.validEmail]),
       NationalID: new FormControl("", [Validators.required, NationalIDValidators.validNationalID]),
       IsActive: new FormControl(true, Validators.required),
       JobID: new FormControl(null, Validators.required),

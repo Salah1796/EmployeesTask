@@ -1,4 +1,4 @@
-<div class="container d-flex justify-content-center mt-5  rtl    ">
+<div class="container d-flex justify-content-center mt-5  rtl">
 
     <div class="card w-100">
         <div class="card-header d-flex justify-content-between " style="height: 60px;">
@@ -35,11 +35,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail4">البريد الالكتروني</label>
-                        <input formControlName="Email" type="email" class="form-control" id="inputEmail4">
+                        <input formControlName="Email" type="text" class="form-control" id="inputEmail4">
                         <div *ngIf="Email.touched && Email.invalid" class="alert alert-danger">
 
                             <div *ngIf="Email.errors.required">البريد الالكتروني مطلوب</div>
-                            <div *ngIf="Email.errors.email"> بريد إلكتروني خاطئ</div>
+                            <div *ngIf="Email.errors.validEmail"> بريد إلكتروني خاطئ</div>
 
                         </div>
 

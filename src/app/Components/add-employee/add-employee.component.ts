@@ -1,11 +1,12 @@
 import { EmployeeService } from './../../Services/employee.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, EmailValidator } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NationalIDValidators } from 'src/app/shared/NationalID.Validators';
 import { PhoneValidators } from 'src/app/shared/phone.validators';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Employee } from 'src/app/Models/Employee';
+import { EmailValidators } from 'src/app/shared/Email.vaildators';
 
 @Component({
   selector: 'app-add-employee',
@@ -28,9 +29,11 @@ export class AddEmployeeComponent implements OnInit {
       else
         this.toaster.error("حدث خطأ ما")
     })
+
+    
     this.AddEmployeeFrom = new FormGroup({
       Name: new FormControl("", [Validators.required, Validators.maxLength(200)]),
-      Email: new FormControl("", [Validators.required, Validators.email]),
+      Email: new FormControl("", [Validators.required,EmailValidators.validEmail]),
       NationalID: new FormControl("", [Validators.required, NationalIDValidators.validNationalID]),
       IsActive: new FormControl(true, Validators.required),
       JobID: new FormControl(null, Validators.required),
